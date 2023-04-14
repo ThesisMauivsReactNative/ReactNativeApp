@@ -1,4 +1,10 @@
-import {StyleSheet, Text, View, Button, PermissionsAndroid} from 'react-native';
+import {
+  StyleSheet,
+  Alert,
+  View,
+  Button,
+  PermissionsAndroid,
+} from 'react-native';
 import Geolocation from 'react-native-geolocation-service';
 import {useState} from 'react';
 import GETAPI from './GETAPI';
@@ -31,7 +37,7 @@ const requestLocationPermission = async () => {
 
 const GPS = () => {
   const [location, setLocation] = useState(false);
-  const [isrenderedList,setisrenderedList] = useState(false);
+  const [isrenderedList, setisrenderedList] = useState(false);
   const [triggerPost, settriggerPost] = useState(false);
   // function to check permissions and get Location
   const getLocation = () => {
@@ -42,9 +48,15 @@ const GPS = () => {
         Geolocation.getCurrentPosition(
           position => {
             const end = performance.now();
-            console.log('this is a your position' + JSON.stringify(position));
-            console.log(`Execution time of GPS API: ${end - start} ms`);
             setLocation(position);
+            Alert.alert(
+              'Latitude=' +
+                position.coords.longitude +
+                ', Longitude=' +
+                position.coords.latitude +
+                ', TTC=' +
+                (end - start),
+            );
           },
           error => {
             // See error code charts below.
@@ -59,18 +71,30 @@ const GPS = () => {
 
   return (
     <View style={styles.container}>
-      {location &&
+      {/*location &&
         <View>
             <Text>Latitude: {location ? location.coords.longitude : null} </Text>
          <Text>Longitude: {location ? location.coords.longitude : null} </Text>
         </View>
-      }
+  */}
       {isrenderedList && <GETAPI />}
-      {triggerPost && <POSTAPI trigger={triggerPost} />}
-      <View style ={styles.bottom} >
-      <Button style ={styles.button} title="Get Location" onPress={getLocation} />
-      <Button style ={styles.button} title="Get List" onPress={() => setisrenderedList(true)} />
-      <Button style ={styles.button} title="Post Item" onPress={() => settriggerPost(true)} />
+      {/*triggerPost && <POSTAPI trigger={triggerPost} />*/}
+      <View style={styles.bottom}>
+        <Button
+          style={styles.button}
+          title="Get Location"
+          onPress={getLocation}
+        />
+        <Button
+          style={styles.button}
+          title="Get List"
+          onPress={() => setisrenderedList(true)}
+        />
+        <Button
+          style={styles.button}
+          title="Post Item"
+          onPress={() => settriggerPost(true)}
+        />
       </View>
     </View>
   );
@@ -78,17 +102,16 @@ const GPS = () => {
 
 const styles = StyleSheet.create({
   container: {
-    flex:1,
+    flex: 1,
   },
-  bottom:{
+  bottom: {
     flex: 1,
     alignItems: 'flex-end',
-    marginBottom:8,
-    flexDirection:'row',
+    marginBottom: 8,
+    flexDirection: 'row',
     width: '100%',
-    justifyContent:'space-evenly',
+    justifyContent: 'space-evenly',
   },
-
 });
 
 export default GPS;

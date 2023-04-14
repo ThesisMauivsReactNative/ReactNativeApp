@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {ActivityIndicator, FlatList, Text, View, Image} from 'react-native';
+import {ActivityIndicator, FlatList, Text, View, Image,Alert} from 'react-native';
 
 const GETAPI = () => {
     const [isLoading, setLoading] = useState(true);
@@ -12,7 +12,7 @@ const GETAPI = () => {
         const response = await fetch(URL);
         const json = await response.json();
         const end = performance.now();
-        console.log(`Execution time of GET API: ${end - start} ms`);
+        Alert.alert(`TTC GET API= ${end - start} ms`);
         console.log(json);
         setData(json);
       } catch (error) {

@@ -22,15 +22,14 @@ const POSTAPI = ({trigger}) => {
         })
         .then((response) => response.json())
         .then((responseDATA) => {
-            Alert.alert('Post created at : ', responseDATA.createdAt);
-            console.log(JSON.stringify(responseDATA));
+            Alert.alert('Item is posted to the server');
         })
         .catch((error) => {
             console.error(JSON.stringify(error));
           });
 
         const end = performance.now();
-        console.log(`Execution time of POST API: ${end - start} ms`);
+        Alert.alert(`Item is posted to the server, TTC POST API= ${end - start} ms`);
         };
 
         useEffect(() =>{
@@ -39,7 +38,7 @@ const POSTAPI = ({trigger}) => {
 
     return (
         <View style={styles.btn}>
-        {trigger && <Text> Item is posted to the server</Text>}
+        {/*trigger && <Text> Item is posted to the server</Text>*/}
     </View>
     );
   };
