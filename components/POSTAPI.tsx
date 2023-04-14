@@ -21,9 +21,6 @@ const POSTAPI = ({trigger}) => {
               }),
         })
         .then((response) => response.json())
-        .then((responseDATA) => {
-            Alert.alert('Item is posted to the server');
-        })
         .catch((error) => {
             console.error(JSON.stringify(error));
           });
