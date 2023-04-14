@@ -21,12 +21,14 @@ const POSTAPI = ({trigger}) => {
               }),
         })
         .then((response) => response.json())
+        .then((responseDATA) => {
+            const end = performance.now();
+            Alert.alert(`The data is posted successfully, TCP POST API= ${end - start} ms`);
+            console.log(JSON.stringify(responseDATA));
+        })
         .catch((error) => {
             console.error(JSON.stringify(error));
           });
-
-        const end = performance.now();
-        Alert.alert(`Item is posted to the server, TTC POST API= ${end - start} ms`);
         };
 
         useEffect(() =>{
@@ -34,14 +36,8 @@ const POSTAPI = ({trigger}) => {
         }, [trigger]);
 
     return (
-        <View style={styles.btn}>
-        {/*trigger && <Text> Item is posted to the server</Text>*/}
-    </View>
+        <View></View>
     );
   };
-  const styles = StyleSheet.create({
-    btn: {
-        flex:1,
-    },
-});
+
 export default POSTAPI;

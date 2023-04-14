@@ -78,7 +78,7 @@ const GPS = () => {
         </View>
   */}
       {isrenderedList && <GETAPI />}
-      {/*triggerPost && <POSTAPI trigger={triggerPost} />*/}
+      <POSTAPI trigger={triggerPost} />
       <View style={styles.bottom}>
         <Button
           style={styles.button}
