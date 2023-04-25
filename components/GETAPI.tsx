@@ -5,7 +5,7 @@ const GETAPI = () => {
     const [isLoading, setLoading] = useState(true);
     const [data, setData] = useState([]);
 
-    const getMovies = async () => {
+    const getItems = async () => {
       try {
         const start = performance.now();
         const URL = 'http://10.0.2.2:3030/item';
@@ -23,7 +23,7 @@ const GETAPI = () => {
     };
 
     useEffect(() => {
-      getMovies();
+      getItems();
     }, []);
 
     return (

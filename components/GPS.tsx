@@ -9,6 +9,7 @@ import Geolocation from 'react-native-geolocation-service';
 import {useState} from 'react';
 import GETAPI from './GETAPI';
 import POSTAPI from './POSTAPI';
+import { PerformanceMeasureView } from '@shopify/react-native-performance';
 
 // Function to get permission for location
 const requestLocationPermission = async () => {
@@ -36,7 +37,6 @@ const requestLocationPermission = async () => {
 };
 
 const GPS = () => {
-  const [location, setLocation] = useState(false);
   const [isrenderedList, setisrenderedList] = useState(false);
   const [triggerPost, settriggerPost] = useState(false);
   // function to check permissions and get Location
@@ -48,11 +48,10 @@ const GPS = () => {
         Geolocation.getCurrentPosition(
           position => {
             const end = performance.now();
-            setLocation(position);
             Alert.alert(
-              'Latitude=' +
+              'Lat=' +
                 position.coords.longitude +
-                ', Longitude=' +
+                ', Long=' +
                 position.coords.latitude +
                 ', TTC=' +
                 (end - start),
@@ -70,13 +69,7 @@ const GPS = () => {
   };
 
   return (
-    <View style={styles.container}>
-      {/*location &&
-        <View>
-            <Text>Latitude: {location ? location.coords.longitude : null} </Text>
-         <Text>Longitude: {location ? location.coords.longitude : null} </Text>
-        </View>
-  */}
+    <PerformanceMeasureView style={styles.container} screenName='Home' interactive={true}>
       {isrenderedList && <GETAPI />}
       <POSTAPI trigger={triggerPost} />
       <View style={styles.bottom}>
@@ -96,7 +89,7 @@ const GPS = () => {
           onPress={() => settriggerPost(true)}
         />
       </View>
-    </View>
+    </PerformanceMeasureView>
   );
 };
 
